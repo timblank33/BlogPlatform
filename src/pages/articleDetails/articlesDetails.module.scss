@@ -1,0 +1,197 @@
+
+
+$tagsColor: #00000080;
+$shadowArticle: #00000026;
+
+.article-details {
+    margin: 0 251px;
+    background-color: #fff;
+    min-height: calc(100vh - 230px);
+    height: 100%;
+    position: relative;
+    box-shadow: 0 4px 12px $shadowArticle;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 18px;
+    padding-bottom: 24px;
+    margin-top: 26px;
+    margin-bottom: 64px;
+    word-wrap: break-word;
+
+
+    .article-title {
+        display: inline-flex;
+        align-items:center;
+        font-size: 20px;
+        line-height: 28px;
+        color: #1890FF;
+        max-width: 80%;
+        height: 100%;
+        
+    
+        .likes-img {
+            margin-left: 12px;
+            cursor: pointer;
+        }
+        .likes-number {
+            margin-left:5px;
+            font-size: 12px;
+            line-height: 22px;
+            color:#000000BF;
+        }
+    }
+    .article-tags {
+        margin-top: 7px;
+        margin-bottom: 7px;
+        font-size: 12px;
+        line-height: 14.5px;
+    }
+    .tag-btn {
+        padding: 2px 4px;
+        margin-right: 8px;
+        margin-bottom: 7px;
+        border-color: $tagsColor;
+        background-color: transparent;
+        color: $tagsColor;
+        border-radius: 2px;
+        overflow-wrap: anywhere;
+        text-align: left;
+        
+    }
+    .article-text {
+        display: inline-flex;
+        font-size: 12px;
+        line-height: 22px;
+        color: #00000080;
+        margin-bottom: 25px;
+        overflow-wrap: anywhere;
+    }
+    .article-acc {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        right: 14px;
+        top: 15px;
+        
+        .acticle-acc__logo {
+            border-radius: 50%;
+            margin-left: 12px;
+            width: 46px;
+            height: 46px;
+        }
+        .acticle-acc__name {
+            font-size: 18px;
+            line-height: 28px;
+            color:#000000D9;
+        }
+        .acticle-acc__date {
+            font-size: 12px;
+            line-height: 22px;
+            color:#00000080;
+        }
+    }
+
+    .btn-block {
+        position: absolute;
+        top: 91px;
+        right: 14px;
+    }
+    
+    .delete-modal {
+        position: absolute;
+        box-shadow: 0 4px 12px $shadowArticle;
+        width: 240px;
+        height: 104px;
+        top: 0px;
+        right: -174px;
+        border-radius: 4px;
+        box-sizing:border-box;
+        transition: .3s;
+        opacity: 0;
+        z-index: -1;
+
+        .fon-modal {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color:#FFF;
+            overflow: hidden;
+            border-radius: 4px;
+            padding: 12px 16px;
+            z-index: 2;
+        }
+        .romb-modal {
+            background-color: #fff;
+            width: 8.5px;
+            height: 8.5px;
+            position: absolute;
+            top: 14px;
+            left: -4px;
+            transform: rotate(45deg);
+            box-shadow: 0 4px 12px $shadowArticle;
+            z-index: 1;
+        }
+        .block-modal-btn {
+            margin-left: auto;
+        }
+        .btn {
+            margin-left: auto;
+            border: 1px solid #D9D9D9;
+            background-color: transparent;
+            border-radius: 4px;
+            padding: 3px 8px;
+            font-size: 14px;
+            cursor: pointer;
+
+            &:hover {
+                background-color:#1890FF;
+                border: 1px solid #1890FF;
+            }
+            &:first-child {
+                margin-right: 8px;
+            }
+        }
+        .text-block {
+            display: flex;
+            align-items:flex-start;
+        }
+        .text-modal {
+            margin-left: 8px;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+    }
+    .modal-active {
+        opacity: 1;
+        z-index: 2;
+    }
+    .delete-btn {
+        padding: 6px 17px; 
+        color: #F5222D;
+        border: 1px solid #F5222D;
+        border-radius: 5px;
+        font-size: 14px;
+        line-height: 22px;
+        margin-right: 12px;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    .edit-btn {
+        padding: 6px 17px; 
+        color: #52C41A;
+        border: 1px solid #52C41A;
+        border-radius: 5px;
+        font-size: 14px;
+        line-height: 22px;
+        background-color: transparent;
+        cursor: pointer;
+    }
+    
+}

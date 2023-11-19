@@ -1,0 +1,85 @@
+$borderColor: #52C41A;
+
+.header{
+    box-sizing: border-box;
+    background-color: #fff;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 22px;
+    
+}
+.header-btns__login {
+    display: flex;
+    align-items: center;
+
+    .create-article {
+        font-size: 12px;
+        padding: 5px 10px;
+        line-height: 22px;
+        border: 1px solid #52C41A;
+        color: #52C41A;
+        border-radius: 5px;
+        margin-right: 27px;
+    }
+    .user-image {
+        border-radius: 50%;
+    }
+    .user-info {
+        font-size: 18px;
+        line-height: 28px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        & p {
+            margin-right: 13px;
+        }
+        
+    }
+
+    .log-out {
+        box-sizing: border-box;
+        border: 1px solid #000000BF;
+        color: #000000BF;
+        border-radius: 5px;
+        font-size: 18px;
+        line-height: 28px;
+        margin-left: 27px;
+        
+    }
+}
+.header-logo {
+    font-size: 18px;
+    transition: .3s;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+    
+}
+.header-btns {
+    display: flex;
+    justify-content: space-between;
+    gap: 19px;
+
+}
+.btn {
+    box-sizing:border-box;
+    overflow: hidden;
+    font-size: 18px;
+    padding: 10px 18px;
+    background-color: transparent;
+    border: none;
+    
+    cursor: pointer;
+}
+.sign-up {
+    border: 1px solid $borderColor;
+    color: $borderColor;
+    border-radius: 5px;
+    cursor: pointer;
+}
