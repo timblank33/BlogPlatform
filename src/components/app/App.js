@@ -22,11 +22,13 @@ function App() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (user !== undefined) {
-      dispatch(localStorageSave(user));
+    const log = localStorage.getItem('user');
+    if (log !== undefined) {
+      dispatch(localStorageSave(log));
     }
   }, [dispatch]);
+
+  console.log(localStorage.getItem('user'));
 
   const articlesRender = (
     <React.Fragment>
@@ -61,18 +63,30 @@ function App() {
           />
           <Route
             path="new-article"
-            element={user ? <CreateNewArticle /> : <Navigate to="/sign-in" />}
+            element={
+              localStorage.getItem('user') ? (
+                <CreateNewArticle />
+              ) : (
+                <Navigate to="/sign-in" />
+              )
+            }
           />
           <Route
             path="profile"
-            element={user ? <EditProfile /> : <Navigate to="/sign-in" />}
+            element={
+              localStorage.getItem('user') ? (
+                <EditProfile />
+              ) : (
+                <Navigate to="/sign-in" />
+              )
+            }
           />
           <Route path="/" element={articlesRender} />
           <Route path={`/:id`} element={<ArticleDetails />} />
           <Route
             path={`/:id/edit`}
             element={
-              user ? (
+              localStorage.getItem('user') ? (
                 <EditArticle article={opened?.article} />
               ) : (
                 <Navigate to="/sign-in" />

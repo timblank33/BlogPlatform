@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './signIn.module.scss';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLogin } from '../../store/loginSlice';
+import { clearStatusUp } from '../../store/registrationSlice';
 
 export default function SignIn() {
+  useEffect(() => {
+    dispatch(clearStatusUp());
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -52,8 +57,9 @@ export default function SignIn() {
             required: 'This is required',
           })}
           className={classes['create-input']}
-          type="text"
+          type="password"
           placeholder="Password"
+          autoComplete="on"
         />
         <p className={classes['error-message']}>{errors.password?.message}</p>
       </div>

@@ -9,6 +9,7 @@ export const fetchLoginInfo = createAsyncThunk(
       },
     });
     const body = response.json();
+    console.log(body);
     return body;
   }
 );
@@ -35,6 +36,7 @@ export const fetchEditProfile = createAsyncThunk(
     });
 
     const body = await response.json();
+    localStorage.setItem('user', JSON.stringify(body.user));
     return body;
   }
 );
@@ -67,6 +69,8 @@ const loginSlice = createSlice({
   initialState: {
     errors: null,
     user: null,
+    statusEdit: null,
+    imgError: false,
   },
   reducers: {
     logOutUser(state, action) {
@@ -75,6 +79,12 @@ const loginSlice = createSlice({
     },
     localStorageSave(state, action) {
       state.user = JSON.parse(action.payload);
+    },
+    clearEdit(state, action) {
+      state.statusEdit = null;
+    },
+    imageError(state, action) {
+      state.imgError = action.payload;
     },
   },
   extraReducers: {
@@ -94,7 +104,7 @@ const loginSlice = createSlice({
         : (state.errors = payload.errors);
     },
     [fetchEditProfile.fulfilled]: (state, { payload }) => {
-      state.status = 'resolved';
+      state.statusEdit = 'resolved';
       payload.user
         ? (state.user = payload.user)
         : (state.user.loginError = payload.errors);
@@ -102,5 +112,6 @@ const loginSlice = createSlice({
   },
 });
 
-export const { logOutUser, localStorageSave } = loginSlice.actions;
+export const { logOutUser, localStorageSave, clearEdit, imageError } =
+  loginSlice.actions;
 export default loginSlice.reducer;

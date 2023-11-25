@@ -28,6 +28,11 @@ const registrationSlice = createSlice({
   initialState: {
     errors: null,
   },
+  reducers: {
+    clearStatusUp(state, action) {
+      state.status = null;
+    },
+  },
   extraReducers: {
     [fetchRegistration.pending]: (state, action) => {
       state.status = 'loading';
@@ -44,4 +49,5 @@ const registrationSlice = createSlice({
   },
 });
 
+export const { clearStatusUp } = registrationSlice.actions;
 export default registrationSlice.reducer;

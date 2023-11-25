@@ -19,7 +19,7 @@ export default function EditArticle(object) {
 
   const { user } = useSelector((state) => state.login);
   const { opened, success } = useSelector((state) => state.list);
-  const { title, description, body, tagList } = object.article;
+  const { title, description, body, tagList } = object?.article;
   const [tagsArr, setTagsArr] = useState(tagList);
   const [tagName, setTagName] = useState('');
 

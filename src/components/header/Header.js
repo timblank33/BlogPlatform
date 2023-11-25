@@ -1,20 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './header.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { logOutUser } from '../../store/loginSlice';
 import { clearSuccess } from '../../store/articleSlice';
 import { useDispatch } from 'react-redux';
+import { clearEdit, imageError } from '../../store/loginSlice';
+import { clearOpened } from '../../store/articleSlice';
 
 export default function Header() {
   const { user } = useSelector((state) => state.login);
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch(clearEdit());
+    dispatch(clearOpened());
+    dispatch(imageError(false));
+  }, [dispatch, location.pathname]);
 
   const formatImage = (url) => {
-    return url && url.image.length > 10
+    return url && url.image?.length > 10
       ? url.image
       : 'https://junior3d.ru/wp-content/themes/3d/assets/img/no-image.gif';
   };
+
   const guest = (
     <React.Fragment>
       <Link to="/" className={classes['header-logo']}>
@@ -58,6 +68,11 @@ export default function Header() {
               alt="logo"
               width={'46px'}
               height={'46px'}
+              onError={(err) => {
+                err.target.src =
+                  'https://junior3d.ru/wp-content/themes/3d/assets/img/no-image.gif';
+                dispatch(imageError(true));
+              }}
             />
           </div>
         </Link>

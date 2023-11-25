@@ -43,6 +43,7 @@
         border-radius: 4px;
         font-size: 16px;
         margin-top: 21px;
+        margin-bottom: 10px;
         line-height: 24px;
         text-align: center;
     }
@@ -63,6 +64,11 @@
     }
     .error-message {
         color:#F5222D;
+        font-size: 14px;
+        line-height: 22px;
+    }
+    .success-message {
+        color:rgba(57, 238, 12, 0.812);
         font-size: 14px;
         line-height: 22px;
     }

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import classes from './editProfile.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { fetchEditProfile } from '../../store/loginSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function EditProfile() {
   const {
@@ -13,13 +14,33 @@ export default function EditProfile() {
     watch,
   } = useForm();
 
-  const { token, loginError } = useSelector((state) => state.login.user || 0);
+  const { token, loginError, username, email, image } = useSelector(
+    (state) => state.login.user || 0
+  );
+  const { statusEdit, imgError } = useSelector((state) => state.login);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userName = watch().userName;
   const emailAdress = watch().emailAdress;
   const password = watch().password;
   const avatarImage = watch().avatarImage;
+
+  useEffect(() => {
+    if (imgError) {
+      dispatch(
+        fetchEditProfile({
+          username: userName,
+          email: emailAdress,
+          password: password,
+          image:
+            'https://junior3d.ru/wp-content/themes/3d/assets/img/no-image.gif',
+          token,
+        })
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, imgError]);
 
   return (
     <form
@@ -33,6 +54,9 @@ export default function EditProfile() {
             token,
           })
         );
+        setTimeout(() => {
+          navigate(`/`);
+        }, 1000);
       })}
       className={classes['create-acc']}
     >
@@ -54,6 +78,7 @@ export default function EditProfile() {
           className={classes['create-input']}
           type="text"
           placeholder="Username"
+          defaultValue={username}
         />
         <p className={classes['error-message']}>
           {errors.userName?.message || loginError?.username}
@@ -77,6 +102,7 @@ export default function EditProfile() {
           className={classes['create-input']}
           type="text"
           placeholder="Email address"
+          defaultValue={email}
         />
         <p className={classes['error-message']}>
           {errors.emailAdress?.message || loginError?.email}
@@ -115,10 +141,19 @@ export default function EditProfile() {
           className={classes['create-input']}
           type="text"
           placeholder="Avatar image"
+          defaultValue={
+            image ===
+            'https://junior3d.ru/wp-content/themes/3d/assets/img/no-image.gif'
+              ? ''
+              : image
+          }
         />
         <p className={classes['error-message']}>
           {errors.avatarImage?.message}
         </p>
+        {imgError ? (
+          <p className={classes['error-message']}>Image not found</p>
+        ) : null}
       </div>
 
       <input
@@ -126,6 +161,9 @@ export default function EditProfile() {
         className={classes['create-submit']}
         value={'Save'}
       />
+      {statusEdit === 'resolved' ? (
+        <p className={classes['success-message']}>Confirm</p>
+      ) : null}
     </form>
   );
 }
