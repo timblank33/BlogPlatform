@@ -14,7 +14,7 @@ export default function ArticleList() {
   }, [dispatch, pageNumber, user?.token]);
 
   const articles = useSelector((state) => state.list.fetchProps.articles);
-
+  window.scrollTo(0, 0);
   return (
     <div className={classes['article-list']}>
       {articles.map((article) => {
