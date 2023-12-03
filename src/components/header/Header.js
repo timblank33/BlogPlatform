@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { logOutUser } from '../../store/loginSlice';
 import { clearSuccess } from '../../store/articleSlice';
 import { useDispatch } from 'react-redux';
-import { clearEdit, imageError } from '../../store/loginSlice';
+import { clearEdit } from '../../store/loginSlice';
 import { clearOpened } from '../../store/articleSlice';
 
 export default function Header() {
@@ -17,7 +17,6 @@ export default function Header() {
   useEffect(() => {
     dispatch(clearEdit());
     dispatch(clearOpened());
-    dispatch(imageError(false));
   }, [dispatch, location.pathname]);
 
   const guest = (
@@ -64,7 +63,6 @@ export default function Header() {
               width={'46px'}
               height={'46px'}
               onError={(err) => {
-                dispatch(imageError(true));
                 err.target.src = noImage;
               }}
             />

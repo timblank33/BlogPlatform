@@ -71,8 +71,12 @@ const loginSlice = createSlice({
     user: null,
     statusEdit: false,
     imgError: false,
+    loader: false,
   },
   reducers: {
+    loaderImg(state, action) {
+      state.loader = action.payload;
+    },
     logOutUser(state, action) {
       state.user = null;
       localStorage.removeItem('user');
@@ -114,6 +118,11 @@ const loginSlice = createSlice({
   },
 });
 
-export const { logOutUser, localStorageSave, clearEdit, imageError } =
-  loginSlice.actions;
+export const {
+  logOutUser,
+  localStorageSave,
+  clearEdit,
+  imageError,
+  loaderImg,
+} = loginSlice.actions;
 export default loginSlice.reducer;

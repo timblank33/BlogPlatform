@@ -1,10 +1,16 @@
 import React, { useEffect } from 'react';
 
 import classes from './editProfile.module.scss';
+import noImage from '../../assets/no-image.gif';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { fetchEditProfile } from '../../store/loginSlice';
+import {
+  fetchEditProfile,
+  imageError,
+  loaderImg,
+} from '../../store/loginSlice';
 import { useNavigate } from 'react-router-dom';
+import { Dna } from 'react-loader-spinner';
 
 export default function EditProfile() {
   const {
@@ -17,7 +23,7 @@ export default function EditProfile() {
   const { token, loginError, username, email, image } = useSelector(
     (state) => state.login.user || 0
   );
-  const { statusEdit, imgError } = useSelector((state) => state.login);
+  const { statusEdit, imgError, loader } = useSelector((state) => state.login);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,38 +33,39 @@ export default function EditProfile() {
   const avatarImage = watch().avatarImage;
 
   useEffect(() => {
-    if (imgError) {
-      dispatch(
-        fetchEditProfile({
-          username: userName,
-          email: emailAdress,
-          password: password,
-          image:
-            'https://junior3d.ru/wp-content/themes/3d/assets/img/no-image.gif',
-          token,
-        })
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, imgError]);
+    dispatch(imageError(false));
+  }, [dispatch, avatarImage]);
 
   return (
     <form
       onSubmit={handleSubmit((data) => {
-        dispatch(
-          fetchEditProfile({
-            username: userName,
-            email: emailAdress,
-            password: password,
-            image:
-              avatarImage ||
-              'https://junior3d.ru/wp-content/themes/3d/assets/img/no-image.gif',
-            token,
+        dispatch(loaderImg(true));
+
+        fetch(avatarImage, { mode: 'no-cors' })
+          .then((res) => {
+            dispatch(loaderImg(false));
+            if (res.status === 404) {
+              dispatch(imageError(true));
+            } else {
+              dispatch(
+                fetchEditProfile({
+                  username: userName,
+                  email: emailAdress,
+                  password: password,
+                  image: avatarImage,
+                  token,
+                })
+              );
+
+              setTimeout(() => {
+                navigate(`/`);
+              }, 1000);
+            }
           })
-        );
-        setTimeout(() => {
-          navigate(`/`);
-        }, 1000);
+          .catch(() => {
+            dispatch(loaderImg(false));
+            dispatch(imageError(true));
+          });
       })}
       className={classes['create-acc']}
     >
@@ -137,22 +144,29 @@ export default function EditProfile() {
             required: 'Enter avatar image',
             pattern: {
               value: /^http[s]*:\/*/,
-              message: 'You can only use format https://www.image.ru./img.jpg',
+              message:
+                'You can only use format http(s)://www.image.ru./img.jpg',
             },
           })}
           className={classes['create-input']}
           type="text"
           placeholder="Avatar image"
-          defaultValue={
-            image ===
-            'https://junior3d.ru/wp-content/themes/3d/assets/img/no-image.gif'
-              ? ''
-              : image
-          }
+          defaultValue={image === noImage ? '' : image}
         />
         <p className={classes['error-message']}>
           {errors.avatarImage?.message}
         </p>
+        {loader ? (
+          <Dna
+            className={classes['loader-img']}
+            visible={true}
+            height="40"
+            width="40"
+            ariaLabel="dna-loading"
+            wrapperStyle={{}}
+            wrapperClass="loader-img"
+          />
+        ) : null}
         {imgError ? (
           <p className={classes['error-message']}>Image not found</p>
         ) : null}
