@@ -9,7 +9,6 @@ export const fetchLoginInfo = createAsyncThunk(
       },
     });
     const body = response.json();
-    console.log(body);
     return body;
   }
 );
@@ -18,6 +17,7 @@ export const fetchEditProfile = createAsyncThunk(
   'editProfile',
   async function (object) {
     const { username, email, password, image, token } = object;
+
     const response = await fetch(`https://blog.kata.academy/api/user`, {
       method: 'PUT',
       headers: {
@@ -69,7 +69,7 @@ const loginSlice = createSlice({
   initialState: {
     errors: null,
     user: null,
-    statusEdit: null,
+    statusEdit: false,
     imgError: false,
   },
   reducers: {
@@ -78,7 +78,9 @@ const loginSlice = createSlice({
       localStorage.removeItem('user');
     },
     localStorageSave(state, action) {
-      state.user = JSON.parse(action.payload);
+      if (action.payload !== 'undefined') {
+        state.user = JSON.parse(action.payload);
+      }
     },
     clearEdit(state, action) {
       state.statusEdit = null;

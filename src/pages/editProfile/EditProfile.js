@@ -50,7 +50,9 @@ export default function EditProfile() {
             username: userName,
             email: emailAdress,
             password: password,
-            image: avatarImage,
+            image:
+              avatarImage ||
+              'https://junior3d.ru/wp-content/themes/3d/assets/img/no-image.gif',
             token,
           })
         );
@@ -134,7 +136,7 @@ export default function EditProfile() {
           {...register('avatarImage', {
             required: 'Enter avatar image',
             pattern: {
-              value: /^https:\/*/,
+              value: /^http[s]*:\/*/,
               message: 'You can only use format https://www.image.ru./img.jpg',
             },
           })}

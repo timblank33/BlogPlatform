@@ -21,14 +21,10 @@ function App() {
   const { user } = useSelector((state) => state.login);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    const log = localStorage.getItem('user');
-    if (log !== undefined) {
-      dispatch(localStorageSave(log));
-    }
-  }, [dispatch]);
 
-  console.log(localStorage.getItem('user'));
+  useEffect(() => {
+    dispatch(localStorageSave(localStorage.getItem('user')));
+  }, [dispatch]);
 
   const articlesRender = (
     <React.Fragment>
