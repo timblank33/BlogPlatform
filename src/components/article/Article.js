@@ -104,13 +104,15 @@ export default function Article({
       <div className={classes['article-acc']}>
         <div className={classes['acticle-acc__text']}>
           <p className={classes['acticle-acc__name']}>
-            {status !== 'resolved' ? spinner : author.username}
+            {status !== 'resolved' ? null : author.username}
           </p>
           <p className={classes['acticle-acc__date']}>
             {status !== 'resolved' ? null : formatDate}
           </p>
         </div>
-        {status !== 'resolved' ? null : (
+        {status !== 'resolved' ? (
+          spinner
+        ) : (
           <img
             className={classes['acticle-acc__logo']}
             src={author?.image}
