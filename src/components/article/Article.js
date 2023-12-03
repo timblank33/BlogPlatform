@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './article.module.scss';
 import likesImg from '../../assets/likes.svg';
+import noImage from '../../assets/no-image.gif';
 import { format } from 'date-fns';
 import { nanoid } from 'nanoid';
 import { Link } from 'react-router-dom';
@@ -112,8 +113,11 @@ export default function Article({
         {status !== 'resolved' ? null : (
           <img
             className={classes['acticle-acc__logo']}
-            src={author.image}
+            src={author?.image}
             alt="logo"
+            onError={(err) => {
+              err.target.src = noImage;
+            }}
           />
         )}
       </div>

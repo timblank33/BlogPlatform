@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import classes from './articlesDetails.module.scss';
+import noImage from '../../assets/no-image.gif';
 import likesImg from '../../assets/likes.svg';
 import Markdown from 'react-markdown';
 import format from 'date-fns/format';
@@ -181,6 +182,9 @@ export const ArticleDetails = () => {
             src={open?.article.author.image}
             alt="logo"
             width={`46px`}
+            onError={(err) => {
+              err.target.src = noImage;
+            }}
           />
         )}
       </div>

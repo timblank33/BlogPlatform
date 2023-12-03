@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import classes from './header.module.scss';
+import noImage from '../../assets/no-image.gif';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { logOutUser } from '../../store/loginSlice';
@@ -18,12 +19,6 @@ export default function Header() {
     dispatch(clearOpened());
     dispatch(imageError(false));
   }, [dispatch, location.pathname]);
-
-  const formatImage = (url) => {
-    return url && url.image?.length > 10
-      ? url.image
-      : 'https://junior3d.ru/wp-content/themes/3d/assets/img/no-image.gif';
-  };
 
   const guest = (
     <React.Fragment>
@@ -64,14 +59,13 @@ export default function Header() {
             <p>{user?.username}</p>
             <img
               className={classes['user-image']}
-              src={formatImage(user)}
+              src={user?.image}
               alt="logo"
               width={'46px'}
               height={'46px'}
               onError={(err) => {
-                err.target.src =
-                  'https://junior3d.ru/wp-content/themes/3d/assets/img/no-image.gif';
                 dispatch(imageError(true));
+                err.target.src = noImage;
               }}
             />
           </div>
