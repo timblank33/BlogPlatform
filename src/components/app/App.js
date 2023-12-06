@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import classes from './app.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchList, currentPage } from '../../store/articleSlice';
+import { currentPage } from '../../store/articleSlice';
 import { Pagination } from 'antd';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Header from '../header';
@@ -41,7 +41,6 @@ function App() {
           showSizeChanger={false}
           onChange={(page) => {
             dispatch(currentPage(page));
-            dispatch(fetchList((page - 1) * 5));
           }}
         />
       </div>
