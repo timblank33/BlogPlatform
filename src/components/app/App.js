@@ -28,6 +28,7 @@ function App() {
       currentPage(localStorage.setItem('pageNumber', 1));
     }
     dispatch(currentPage(+localStorage.getItem('pageNumber')));
+    dispatch(fetchList((+localStorage.getItem('pageNumber') - 1) * 5));
   }, [dispatch]);
 
   const articlesRender = (
