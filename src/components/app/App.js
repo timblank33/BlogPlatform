@@ -24,6 +24,13 @@ function App() {
 
   useEffect(() => {
     dispatch(localStorageSave(localStorage.getItem('user')));
+    dispatch(
+      currentPage(
+        +localStorage.getItem('pageNumber') <= 0
+          ? 1
+          : +localStorage.getItem('pageNumber')
+      )
+    );
   }, [dispatch]);
 
   const articlesRender = (
