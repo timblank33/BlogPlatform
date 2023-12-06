@@ -20,6 +20,8 @@ export default function EditArticle(object) {
   const { user } = useSelector((state) => state.login);
   const { opened, success } = useSelector((state) => state.list);
   const { title, description, body, tagList } = object?.article;
+
+  const [tagsErr, setTagsErr] = useState(false);
   const [tagsArr, setTagsArr] = useState(tagList);
   const [tagName, setTagName] = useState('');
 
@@ -58,6 +60,12 @@ export default function EditArticle(object) {
         <input
           {...register('title', {
             required: 'This is required',
+            pattern: {
+              value:
+                /^(?!.*(\s)\1{1,})(?!.*(\S)\2{3,})(?=.*[a-zа-яA-ZА-Я])[a-zа-яA-ZА-Я\d](\s*[a-zа-яA-ZА-Я\d])+$/,
+              message:
+                'Not validate title. Remove extra spaces in the line or more than 4 identical symbols',
+            },
           })}
           className={classes['input-create-article']}
           type="text"
@@ -78,6 +86,12 @@ export default function EditArticle(object) {
         <input
           {...register('shortsDescription', {
             required: 'This is required',
+            pattern: {
+              value:
+                /^(?!.*(\s)\1{1,})(?!.*(\S)\2{3,})(?=.*[a-zа-яA-ZА-Я])[a-zа-яA-ZА-Я\d](\s*[a-zа-яA-ZА-Я\d])+$/,
+              message:
+                'Not validate title. Remove extra spaces in the line or more than 4 identical symbols',
+            },
           })}
           className={classes['input-create-article']}
           type="text"
@@ -97,6 +111,12 @@ export default function EditArticle(object) {
         <textarea
           {...register('text', {
             required: 'This is required',
+            pattern: {
+              value:
+                /^(?!.*(\s)\1{1,})(?!.*(\S)\2{3,})(?=.*[a-zа-яA-ZА-Я])[a-zа-яA-ZА-Я\d](\s*[a-zа-яA-ZА-Я\d])+$/,
+              message:
+                'Not validate text. Remove extra spaces in the line or more than 4 identical symbols',
+            },
           })}
           className={`${classes['input-create-article']} ${classes['input-textarea']}`}
           placeholder="Text"
@@ -130,6 +150,12 @@ export default function EditArticle(object) {
             }}
             value={tagName}
           />
+          {!tagsErr ? null : (
+            <p className={classes['error-message']}>
+              Not validate tag. Remove extra spaces in the line or one or more
+              than 4 identical symbols
+            </p>
+          )}
           <button
             type="button"
             className={classes['delete-tag']}
@@ -143,8 +169,17 @@ export default function EditArticle(object) {
             type="button"
             className={classes['add-tag']}
             onClick={(e) => {
-              setTagsArr((oldArr) => [...oldArr, tagName]);
-              setTagName('');
+              if (
+                tagName.match(
+                  /^(?!.*(\s)\1{1,})(?!.*(\S)\2{3,})(?=.*[a-zа-яA-ZА-Я])[a-zа-яA-ZА-Я\d](\s*[a-zа-яA-ZА-Я\d])+$/
+                )
+              ) {
+                setTagsErr(false);
+                setTagsArr((oldArr) => [...oldArr, tagName]);
+                setTagName('');
+              } else {
+                setTagsErr(true);
+              }
             }}
           >
             Add tag

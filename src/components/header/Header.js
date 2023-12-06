@@ -58,7 +58,7 @@ export default function Header() {
             <p>{user?.username}</p>
             <img
               className={classes['user-image']}
-              src={user?.image}
+              src={user?.image || noImage}
               alt="logo"
               width={'46px'}
               height={'46px'}

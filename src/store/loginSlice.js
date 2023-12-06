@@ -80,6 +80,7 @@ const loginSlice = createSlice({
     logOutUser(state, action) {
       state.user = null;
       localStorage.removeItem('user');
+      localStorage.removeItem('pageNumber');
     },
     localStorageSave(state, action) {
       if (action.payload !== 'undefined') {

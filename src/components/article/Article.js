@@ -115,7 +115,12 @@ export default function Article({
         ) : (
           <img
             className={classes['acticle-acc__logo']}
-            src={author?.image}
+            src={
+              author.image !==
+              'https://static.productionready.io/images/smiley-cyrus.jpg'
+                ? author.image
+                : noImage
+            }
             alt="logo"
             onError={(err) => {
               err.target.src = noImage;

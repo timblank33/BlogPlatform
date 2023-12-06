@@ -47,7 +47,13 @@
     }
 
     .tags-block {
+        position: relative;
         display: flex;
+
+        & p{
+            top: 40px;
+            position: absolute;
+        }
     }
     .input-tag {
         box-sizing: border-box;
