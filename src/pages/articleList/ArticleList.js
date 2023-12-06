@@ -10,7 +10,15 @@ export default function ArticleList() {
   const { user } = useSelector((state) => state.login);
   const { pageNumber } = useSelector((state) => state.list);
   useEffect(() => {
-    dispatch(fetchList({ token: user?.token, number: (pageNumber - 1) * 5 }));
+    dispatch(
+      fetchList({
+        token: user?.token,
+        number:
+          (+localStorage.getItem('pageNumber') - 1) * 5 > 0
+            ? (+localStorage.getItem('pageNumber') - 1) * 5
+            : 0,
+      })
+    );
   }, [dispatch, pageNumber, user?.token]);
 
   const articles = useSelector((state) => state.list.fetchProps.articles);

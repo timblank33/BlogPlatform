@@ -153,8 +153,8 @@ const articleSlice = createSlice({
   reducers: {
     currentPage(state, action) {
       state.pageNumber = action.payload;
+
       localStorage.setItem('pageNumber', action.payload);
-      fetchList((action.payload - 1) * 5);
     },
     clearSuccess(state, action) {
       state.success = null;

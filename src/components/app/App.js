@@ -15,7 +15,7 @@ import EditArticle from '../../pages/editArticle';
 import { localStorageSave } from '../../store/loginSlice';
 
 function App() {
-  const { error, fetchProps, pageNumber, opened } = useSelector(
+  const { error, fetchProps, opened, pageNumber } = useSelector(
     (state) => state.list
   );
   const { user } = useSelector((state) => state.login);
@@ -24,10 +24,6 @@ function App() {
 
   useEffect(() => {
     dispatch(localStorageSave(localStorage.getItem('user')));
-    if (+localStorage.getItem('pageNumber') === 0) {
-      currentPage(localStorage.setItem('pageNumber', 1));
-    }
-    dispatch(currentPage(+localStorage.getItem('pageNumber')));
   }, [dispatch]);
 
   const articlesRender = (
@@ -35,7 +31,7 @@ function App() {
       <ArticleList />
       <div className={classes['pagination']}>
         <Pagination
-          current={pageNumber}
+          current={+localStorage.getItem('pageNumber') || pageNumber}
           defaultPageSize={5}
           total={fetchProps.articlesCount}
           showSizeChanger={false}
