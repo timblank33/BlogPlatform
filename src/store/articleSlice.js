@@ -154,7 +154,7 @@ const articleSlice = createSlice({
     currentPage(state, action) {
       state.pageNumber = action.payload;
       localStorage.setItem('pageNumber', action.payload);
-      fetchList((+localStorage.getItem('pageNumber') - 1) * 5);
+      fetchList((action.payload - 1) * 5);
     },
     clearSuccess(state, action) {
       state.success = null;
