@@ -62,7 +62,7 @@ export default function EditArticle(object) {
             required: 'This is required',
             pattern: {
               value:
-                /^(?!.*(\s)\1{1,})(?!.*(\S)\2{3,})(?=.*[a-zа-яA-ZА-Я])[a-zа-яA-ZА-Я\d](\s*[a-zа-яA-ZА-Я\d])+$/,
+                /^(?!.*(\s)\1{1,})(?!.*(\S)\2{3,})(?=.*[a-zа-яA-ZА-Я\d])[a-zа-яA-ZА-Я\d](\s*[a-zа-яA-ZА-Я\d])+$/,
               message:
                 'Not validate title. Remove extra spaces in the line or more than 4 identical symbols',
             },
@@ -88,7 +88,7 @@ export default function EditArticle(object) {
             required: 'This is required',
             pattern: {
               value:
-                /^(?!.*(\s)\1{1,})(?!.*(\S)\2{3,})(?=.*[a-zа-яA-ZА-Я])[a-zа-яA-ZА-Я\d](\s*[a-zа-яA-ZА-Я\d])+$/,
+                /^(?!.*(\s)\1{1,})(?!.*(\S)\2{3,})(?=.*[a-zа-яA-ZА-Я\d])[a-zа-яA-ZА-Я\d](\s*[a-zа-яA-ZА-Я\d])+$/,
               message:
                 'Not validate title. Remove extra spaces in the line or more than 4 identical symbols',
             },
@@ -113,7 +113,7 @@ export default function EditArticle(object) {
             required: 'This is required',
             pattern: {
               value:
-                /^(?!.*(\s)\1{1,})(?!.*(\S)\2{3,})(?=.*[a-zа-яA-ZА-Я])[a-zа-яA-ZА-Я\d](\s*[a-zа-яA-ZА-Я\d])+$/,
+                /^(?!.*(\s)\1{1,})(?!.*(\S)\2{3,})(?=.*[a-zа-яA-ZА-Я\d])[a-zа-яA-ZА-Я\d](\s*[a-zа-яA-ZА-Я\d])+$/,
               message:
                 'Not validate text. Remove extra spaces in the line or more than 4 identical symbols',
             },
@@ -171,7 +171,7 @@ export default function EditArticle(object) {
             onClick={(e) => {
               if (
                 tagName.match(
-                  /^(?!.*(\s)\1{1,})(?!.*(\S)\2{3,})(?=.*[a-zа-яA-ZА-Я])[a-zа-яA-ZА-Я\d](\s*[a-zа-яA-ZА-Я\d])+$/
+                  /^(?!.*(\s)\1{1,})(?!.*(\S)\2{3,})(?=.*[a-zа-яA-ZА-Я]\d)[a-zа-яA-ZА-Я\d](\s*[a-zа-яA-ZА-Я\d])+$/
                 )
               ) {
                 setTagsErr(false);
